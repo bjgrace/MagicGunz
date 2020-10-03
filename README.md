@@ -1,0 +1,2 @@
+# MagicGunz
+A vidja game
