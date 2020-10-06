@@ -566,7 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0}
   moveSpeed: 0
-  baseSpeed: 3
+  baseSpeed: 5
   rb: {fileID: 658267224}
   mousePos: {x: 0, y: 0}
   playerCam: {fileID: 519420031}
