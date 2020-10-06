@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Attributes")]
     // movement direction based on controller input
     public Vector2 moveDirection;
+
     // movement speed based on controller input intensity
     public float moveSpeed;
 
@@ -20,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
     // rigidbody 2d class for interactions
     public Rigidbody2D rb;
 
+    // mouse position
+    public Vector2 mousePos;
+
+    // player camera
+    public Camera playerCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +38,12 @@ public class PlayerMovement : MonoBehaviour
     {
         // read controller inputs
         ProcessInputs();
+
         // translate character
-        Movement();
+        MovePlayer();
+
+        // rotate character
+        RotatePlayer();
     }
 
     // This function processes the controller input
@@ -40,14 +51,31 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get vector from controller input
         moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
         // Base the movement speed on the intensity of controller input, clamp magnitude to be between 0 and 1
         moveSpeed = Mathf.Clamp(moveDirection.magnitude, 0.0f, 1.0f);
         moveDirection.Normalize();
+
+        // Get mouse position
+        mousePos = playerCam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // This function acts on the controller input and is called after ProcessInputs() and makes the player move
-    void Movement()
+    void MovePlayer()
     {
         rb.velocity = moveDirection * moveSpeed * baseSpeed;
+    }
+
+    // This function acts on a mouse/look joystick input and is called after ProcessInputs() to make the player rotate
+    void RotatePlayer()
+    {
+        // Get the look direction for the player
+        Vector2 lookVec = mousePos - rb.position;
+
+        // Compute angle around unit circle that the look direction is rotated
+        float lookAngle = Mathf.Atan2(lookVec.y, lookVec.x) * Mathf.Rad2Deg - 90f;
+
+        // Change rotation of the player
+        rb.rotation = lookAngle;
     }
 }
