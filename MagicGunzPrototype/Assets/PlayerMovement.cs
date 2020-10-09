@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     // rigidbody 2d class for interactions
     public Rigidbody2D rb;
 
+    // rigidbody 2d class for cursor
+    public Rigidbody2D curs;
+
     // mouse position
     public Vector2 mousePos;
 
@@ -56,8 +59,8 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = Mathf.Clamp(moveDirection.magnitude, 0.0f, 1.0f);
         moveDirection.Normalize();
 
-        // Get mouse position
-        mousePos = playerCam.ScreenToWorldPoint(Input.mousePosition);
+        // Get mouse position (cursor position)
+        mousePos = curs.position; //playerCam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // This function acts on the controller input and is called after ProcessInputs() and makes the player move
