@@ -52,9 +52,9 @@
     <UnityVersion>2020.1.7f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\CursorMove.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\MainCameraScript.cs" />
-    <Compile Include="Assets\CursorMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
